@@ -1,0 +1,4 @@
+include ':libcocos2dx'
+project(':libcocos2dx').projectDir = new File(settingsDir, '../cocos2d/cocos/platform/android/libcocos2dx')
+include ':astc-in-cocos2dx-3.17'
+project(':astc-in-cocos2dx-3.17').projectDir = new File(settingsDir, 'app')
