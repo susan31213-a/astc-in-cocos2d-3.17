@@ -3563,6 +3563,12 @@
 		94A6DF081C73040E0094AEF7 /* LocalizationManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 94A6DF031C7303FD0094AEF7 /* LocalizationManager.cpp */; };
 		94A6DF091C7304120094AEF7 /* LocalizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94A6DF041C7303FD0094AEF7 /* LocalizationManager.h */; };
 		94A6DF0A1C7304120094AEF7 /* LocalizationManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 94A6DF041C7303FD0094AEF7 /* LocalizationManager.h */; };
+		9AE58635293F196F00B0B910 /* astc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE58633293F196E00B0B910 /* astc.cpp */; };
+		9AE58636293F196F00B0B910 /* astc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE58633293F196E00B0B910 /* astc.cpp */; };
+		9AE58637293F196F00B0B910 /* astc.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9AE58633293F196E00B0B910 /* astc.cpp */; };
+		9AE58638293F196F00B0B910 /* astc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE58634293F196E00B0B910 /* astc.h */; };
+		9AE58639293F196F00B0B910 /* astc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE58634293F196E00B0B910 /* astc.h */; };
+		9AE5863A293F196F00B0B910 /* astc.h in Headers */ = {isa = PBXBuildFile; fileRef = 9AE58634293F196E00B0B910 /* astc.h */; };
 		A045F6D61BA81577005076C7 /* CCTextureCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A045F6D41BA81577005076C7 /* CCTextureCube.cpp */; };
 		A045F6D71BA81577005076C7 /* CCTextureCube.cpp in Sources */ = {isa = PBXBuildFile; fileRef = A045F6D41BA81577005076C7 /* CCTextureCube.cpp */; };
 		A045F6D81BA81577005076C7 /* CCTextureCube.h in Headers */ = {isa = PBXBuildFile; fileRef = A045F6D51BA81577005076C7 /* CCTextureCube.h */; };
@@ -5603,6 +5609,8 @@
 		85B374381B204B9400C488D6 /* clipper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = clipper.cpp; sourceTree = "<group>"; };
 		94A6DF031C7303FD0094AEF7 /* LocalizationManager.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = LocalizationManager.cpp; sourceTree = "<group>"; };
 		94A6DF041C7303FD0094AEF7 /* LocalizationManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocalizationManager.h; sourceTree = "<group>"; };
+		9AE58633293F196E00B0B910 /* astc.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = astc.cpp; path = ../base/astc.cpp; sourceTree = "<group>"; };
+		9AE58634293F196E00B0B910 /* astc.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = astc.h; path = ../base/astc.h; sourceTree = "<group>"; };
 		A045F6D41BA81577005076C7 /* CCTextureCube.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCTextureCube.cpp; sourceTree = "<group>"; };
 		A045F6D51BA81577005076C7 /* CCTextureCube.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CCTextureCube.h; sourceTree = "<group>"; };
 		A045F6DA1BA816A1005076C7 /* CCCameraBackgroundBrush.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = CCCameraBackgroundBrush.cpp; sourceTree = "<group>"; };
@@ -6467,6 +6475,8 @@
 		1A5700A2180BC5E60088DEC7 /* base */ = {
 			isa = PBXGroup;
 			children = (
+				9AE58633293F196E00B0B910 /* astc.cpp */,
+				9AE58634293F196E00B0B910 /* astc.h */,
 				291901411B05895600F8B4BA /* CCNinePatchImageParser.h */,
 				291901421B05895600F8B4BA /* CCNinePatchImageParser.cpp */,
 				505385001B01887A00793096 /* CCProperties.h */,
@@ -9784,6 +9794,7 @@
 				1A01C69E18F57BE800EFE3A6 /* CCString.h in Headers */,
 				50ABC00F1926664800A911A9 /* CCFileUtils.h in Headers */,
 				503341991D9DC7B400770EC7 /* kvec.h in Headers */,
+				9AE58638293F196F00B0B910 /* astc.h in Headers */,
 				B665E2981AA80A6500DDB1C5 /* CCPUEmitterManager.h in Headers */,
 				182C5CAE1A95961600C30D34 /* CSParse3DBinary_generated.h in Headers */,
 				B665E2BC1AA80A6500DDB1C5 /* CCPUForceFieldAffectorTranslator.h in Headers */,
@@ -10597,6 +10608,7 @@
 				507B407E1C31BDD30067B53E /* CCString.h in Headers */,
 				507B407F1C31BDD30067B53E /* pvr.h in Headers */,
 				507B40821C31BDD30067B53E /* CCComAudio.h in Headers */,
+				9AE5863A293F196F00B0B910 /* astc.h in Headers */,
 				507B40831C31BDD30067B53E /* CCDictionary.h in Headers */,
 				507B40841C31BDD30067B53E /* CCPUOnClearObserverTranslator.h in Headers */,
 				5033419B1D9DC7B400770EC7 /* kvec.h in Headers */,
@@ -11410,6 +11422,7 @@
 				382384041A259005002C4610 /* CSParseBinary_generated.h in Headers */,
 				15AE195419AAD35100C27E9E /* CCDisplayFactory.h in Headers */,
 				1A9DCA2A180E6955007A3AD4 /* CCGLBufferedNode.h in Headers */,
+				9AE58639293F196F00B0B910 /* astc.h in Headers */,
 				1A01C69F18F57BE800EFE3A6 /* CCString.h in Headers */,
 				464AD6E8197EBB1400E502D8 /* pvr.h in Headers */,
 				15AE194819AAD35100C27E9E /* CCComAudio.h in Headers */,
@@ -11948,6 +11961,7 @@
 				1A57022D180BCC1A0088DEC7 /* CCParticleSystemQuad.cpp in Sources */,
 				1A57027E180BCC900088DEC7 /* CCSprite.cpp in Sources */,
 				29DA08F41C63351600F4052B /* UIEditBoxImpl-linux.cpp in Sources */,
+				9AE58635293F196F00B0B910 /* astc.cpp in Sources */,
 				1A570282180BCC900088DEC7 /* CCSpriteBatchNode.cpp in Sources */,
 				1A570286180BCC900088DEC7 /* CCSpriteFrame.cpp in Sources */,
 				B24AA989195A675C007B4522 /* CCFastTMXTiledMap.cpp in Sources */,
@@ -12304,6 +12318,7 @@
 				507B39D71C31BDD30067B53E /* CCPhysicsWorld.cpp in Sources */,
 				507B39D91C31BDD30067B53E /* CCGroupCommand.cpp in Sources */,
 				507B39DA1C31BDD30067B53E /* CCPhysicsShape.cpp in Sources */,
+				9AE58637293F196F00B0B910 /* astc.cpp in Sources */,
 				507B39DB1C31BDD30067B53E /* CCPUOnRandomObserver.cpp in Sources */,
 				507B39DC1C31BDD30067B53E /* CCImage.cpp in Sources */,
 				507B39DD1C31BDD30067B53E /* CCPURandomiserTranslator.cpp in Sources */,
@@ -13434,6 +13449,7 @@
 				1A570359180BD0B00088DEC7 /* unzip.cpp in Sources */,
 				15AE18BB19AAD33D00C27E9E /* CCControlLoader.cpp in Sources */,
 				15AE19B819AAD39700C27E9E /* TextFieldReader.cpp in Sources */,
+				9AE58636293F196F00B0B910 /* astc.cpp in Sources */,
 				B665E29B1AA80A6500DDB1C5 /* CCPUEmitterTranslator.cpp in Sources */,
 				382384101A259092002C4610 /* NodeReaderDefine.cpp in Sources */,
 				15AE195B19AAD35100C27E9E /* CCSGUIReader.cpp in Sources */,
@@ -13759,7 +13775,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-llibsql3";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac $(SRCROOT)/../external/bullet/include $(SRCROOT)/../external/bullet/include/bullet $(SRCROOT)/../external/uv/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac $(SRCROOT)/../external/bullet/include $(SRCROOT)/../external/bullet/include/bullet $(SRCROOT)/../external/uv/include $(SRCROOT)/../external/astc";
 			};
 			name = Debug;
 		};
@@ -13801,7 +13817,7 @@
 				);
 				MACH_O_TYPE = staticlib;
 				OTHER_LDFLAGS = "-llibsql3";
-				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac $(SRCROOT)/../external/bullet/include $(SRCROOT)/../external/bullet/include/bullet $(SRCROOT)/../external/uv/include";
+				USER_HEADER_SEARCH_PATHS = "$(inherited) $(SRCROOT)/../external/png/include/mac $(SRCROOT)/../external/tiff/include/mac $(SRCROOT)/../external/webp/include/mac $(SRCROOT)/../external/jpeg/include/mac $(SRCROOT)/../external/freetype2/include/mac $(SRCROOT)/../external/glfw3/include/mac $(SRCROOT)/../external/websockets/include/mac $(SRCROOT)/../external/curl/include/mac $(SRCROOT)/../external/freetype2/include/mac/freetype2 $(SRCROOT)/../external/openssl/include/mac $(SRCROOT)/../external/bullet/include $(SRCROOT)/../external/bullet/include/bullet $(SRCROOT)/../external/uv/include $(SRCROOT)/../external/astc";
 			};
 			name = Release;
 		};
