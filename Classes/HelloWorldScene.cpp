@@ -20,30 +20,26 @@
  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
  THE SOFTWARE.
+ 
+ edit by liwen.su at 2022/12/07
  ****************************************************************************/
 
 #include "HelloWorldScene.h"
-#include "SimpleAudioEngine.h"
+#include "ui/CocosGUI.h"
 
 USING_NS_CC;
+
+namespace {
+    int ASTC_TAG = 1;
+};
 
 Scene* HelloWorld::createScene()
 {
     return HelloWorld::create();
 }
 
-// Print useful error message instead of segfaulting when files are not there.
-static void problemLoading(const char* filename)
-{
-    printf("Error while loading: %s\n", filename);
-    printf("Depending on how you compiled you might have to add 'Resources/' in front of filenames in HelloWorldScene.cpp\n");
-}
-
-// on "init" you need to initialize your instance
 bool HelloWorld::init()
 {
-    //////////////////////////////
-    // 1. super init first
     if ( !Scene::init() )
     {
         return false;
@@ -52,82 +48,54 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    /////////////////////////////
-    // 2. add a menu item with "X" image, which is clicked to quit the program
-    //    you may modify it.
+    Vec2 pos1 = Vec2(origin + visibleSize / 2);
+    createTappableLabel("4x4", pos1, [this, origin, visibleSize](){
+        createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
+    });
+    Vec2 pos2 = pos1 - Vec2(0, 24);
+    createTappableLabel("8x8", pos2, [this, origin, visibleSize](){
+        createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
+    });
+    Vec2 pos3 = pos2 - Vec2(0, 24);
+    createTappableLabel("clear", pos3, [this](){
+        auto astc = getChildByTag(ASTC_TAG);
+        if (astc) {
+            astc->runAction(RemoveSelf::create());
+        }
+    });
 
-    // add a "close" icon to exit the progress. it's an autorelease object
-    auto closeItem = MenuItemImage::create(
-                                           "CloseNormal.png",
-                                           "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
-
-    if (closeItem == nullptr ||
-        closeItem->getContentSize().width <= 0 ||
-        closeItem->getContentSize().height <= 0)
-    {
-        problemLoading("'CloseNormal.png' and 'CloseSelected.png'");
-    }
-    else
-    {
-        float x = origin.x + visibleSize.width - closeItem->getContentSize().width/2;
-        float y = origin.y + closeItem->getContentSize().height/2;
-        closeItem->setPosition(Vec2(x,y));
-    }
-
-    // create menu, it's an autorelease object
-    auto menu = Menu::create(closeItem, NULL);
-    menu->setPosition(Vec2::ZERO);
-    this->addChild(menu, 1);
-
-    /////////////////////////////
-    // 3. add your codes below...
-
-    // add a label shows "Hello World"
-    // create and initialize a label
-
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    if (label == nullptr)
-    {
-        problemLoading("'fonts/Marker Felt.ttf'");
-    }
-    else
-    {
-        // position the label on the center of the screen
-        label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                                origin.y + visibleSize.height - label->getContentSize().height));
-
-        // add the label as a child to this layer
-        this->addChild(label, 1);
-    }
-
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
-    if (sprite == nullptr)
-    {
-        problemLoading("'HelloWorld.png'");
-    }
-    else
-    {
-        // position the sprite on the center of the screen
-        sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
-
-        // add the sprite as a child to this layer
-        this->addChild(sprite, 0);
-    }
     return true;
 }
 
-
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void HelloWorld::createTappableLabel(const std::string& text, const Vec2& position, std::function<void()> callback)
 {
-    //Close the cocos2d-x game scene and quit the application
-    Director::getInstance()->end();
+    auto button = ui::Button::create("Button_Normal.png", "Button_Press.png", "Button_Disable.png");
+    button->setPosition(position);
+    button->setScale(2);
+    button->setTitleText(text);
+    button->setTitleColor(Color3B::BLACK);
+    button->setTitleFontSize(5);
+    button->addTouchEventListener([callback](Ref* sender, ui::Widget::TouchEventType type){
+        if (callback && type == ui::Widget::TouchEventType::ENDED) {
+            callback();
+        }
+    });
+    this->addChild(button, 1);
+}
 
-    /*To navigate back to native iOS screen(if present) without quitting the application  ,do not use Director::getInstance()->end() as given above,instead trigger a custom event created in RootViewController.mm as below*/
+void HelloWorld::createAstc(const std::string& filepath, const Vec2& position)
+{
+    auto astc = getChildByTag(ASTC_TAG);
+    if (astc) {
+        astc->runAction(RemoveSelf::create());
+    }
 
-    //EventCustom customEndEvent("game_scene_close_event");
-    //_eventDispatcher->dispatchEvent(&customEndEvent);
+    Director::getInstance()->getTextureCache()->removeAllTextures();
 
-
+    auto sprite = Sprite::create(filepath);
+    if (sprite)
+    {
+        sprite->setPosition(position);
+        addChild(sprite, 0, ASTC_TAG);
+    }
 }

@@ -34,11 +34,13 @@ public:
 
     virtual bool init();
     
-    // a selector callback
-    void menuCloseCallback(cocos2d::Ref* pSender);
-    
-    // implement the "static create()" method manually
     CREATE_FUNC(HelloWorld);
+
+private:
+    void createTappableLabel(const std::string& text,
+                             const cocos2d::Vec2& position,
+                             std::function<void()> callback);
+    void createAstc(const std::string& filepath, const cocos2d::Vec2& position);
 };
 
 #endif // __HELLOWORLD_SCENE_H__
