@@ -56,22 +56,71 @@ bool HelloWorld::init()
     auto visibleSize = Director::getInstance()->getVisibleSize();
     Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-    Vec2 pos1 = Vec2(origin + visibleSize / 2);
-    createTappableLabel("4x4", pos1, [this, origin, visibleSize](){
+    Vec2 pos1 = Vec2(origin.x + visibleSize.width / 2, origin.y + visibleSize.height) - Vec2(0, 24);
+    createTappableLabel("512 4x4", pos1, [this, origin, visibleSize](){
         auto start = getNowMillisecond();
-        createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
+        createAstc("lenna512_4x4.astc", Vec2(origin + visibleSize / 2));
         auto end = getNowMillisecond();
         CCLOG("elapsed: %lld", end - start);
     });
     Vec2 pos2 = pos1 - Vec2(0, 24);
-    createTappableLabel("8x8", pos2, [this, origin, visibleSize](){
+    createTappableLabel("512 8x8", pos2, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna512_8x8.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos3 = pos2 - Vec2(0, 24);
+    createTappableLabel("1024 4x4", pos3, [this, origin, visibleSize](){
         auto start = getNowMillisecond();
         createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
         auto end = getNowMillisecond();
         CCLOG("elapsed: %lld", end - start);
     });
-    Vec2 pos3 = pos2 - Vec2(0, 24);
-    createTappableLabel("clear", pos3, [this](){
+    Vec2 pos4 = pos3 - Vec2(0, 24);
+    createTappableLabel("1024 8x8", pos4, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna1024_8x8.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos5 = pos4 - Vec2(0, 24);
+    createTappableLabel("1960 4x4", pos5, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna1960_4x4.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos6 = pos5 - Vec2(0, 24);
+    createTappableLabel("1960 8x8", pos6, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna1960_8x8.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos7 = pos6 - Vec2(0, 24);
+    createTappableLabel("512 png", pos7, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna512.png", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos8 = pos7 - Vec2(0, 24);
+    createTappableLabel("1024 png", pos8, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna1024.png", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos9 = pos8 - Vec2(0, 24);
+    createTappableLabel("1960 png", pos9, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
+        createAstc("lenna1960.png", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
+    });
+    Vec2 pos10 = pos9 - Vec2(0, 24);
+    createTappableLabel("clear", pos10, [this](){
         auto astc = getChildByTag(ASTC_TAG);
         if (astc) {
             astc->runAction(RemoveSelf::create());
@@ -85,7 +134,7 @@ void HelloWorld::createTappableLabel(const std::string& text, const Vec2& positi
 {
     auto button = ui::Button::create("Button_Normal.png", "Button_Press.png", "Button_Disable.png");
     button->setPosition(position);
-    button->setScale(2);
+    button->setScale(1.5f);
     button->setTitleText(text);
     button->setTitleColor(Color3B::BLACK);
     button->setTitleFontSize(5);
