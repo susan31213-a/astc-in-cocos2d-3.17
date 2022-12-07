@@ -18,8 +18,8 @@
 #include <memory>
 #include <vector>
 #include <deque>
-#include "astc/astcenc.h"
-#include "astc/astcenc_internal_entry.h"
+#include "astcenc.h"
+#include "astcenc_internal_entry.h"
 
 #define ASTCDEC_NO_CONTEXT 1
 

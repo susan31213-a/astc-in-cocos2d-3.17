@@ -102,6 +102,8 @@ extern "C"
 #include "decode.h"
 #endif // CC_USE_WEBP
 
+#include "base/astc.h"
+
 #include "base/ccMacros.h"
 #include "platform/CCCommon.h"
 #include "platform/CCStdC.h"
@@ -590,6 +592,9 @@ bool Image::initWithImageData(const unsigned char * data, ssize_t dataLen)
         case Format::ATITC:
             ret = initWithATITCData(unpackedData, unpackedLen);
             break;
+        case Format::ASTC:
+            ret = initWithASTCData(unpackedData, unpackedLen);
+            break;
         default:
             {
                 // load and detect image format
@@ -713,6 +718,15 @@ bool Image::isPvr(const unsigned char * data, ssize_t dataLen)
     return memcmp(&headerv2->pvrTag, gPVRTexIdentifier, strlen(gPVRTexIdentifier)) == 0 || CC_SWAP_INT32_BIG_TO_HOST(headerv3->version) == 0x50565203;
 }
 
+bool Image::isASTC(const unsigned char *data, ssize_t dataLen)
+{
+    astc_header* header = (astc_header*)data;
+
+    uint32_t magicval = astc_unpack_bytes(header->magic[0], header->magic[1], header->magic[2], header->magic[3]);
+
+    return (magicval == ASTC_MAGIC_ID);
+}
+
 Image::Format Image::detectFormat(const unsigned char * data, ssize_t dataLen)
 {
     if (isPng(data, dataLen))
@@ -746,6 +760,10 @@ Image::Format Image::detectFormat(const unsigned char * data, ssize_t dataLen)
     else if (isATITC(data, dataLen))
     {
         return Format::ATITC;
+    }
+    else if (isASTC(data, dataLen))
+    {
+        return Format::ASTC;
     }
     else
     {
@@ -1847,6 +1865,56 @@ bool Image::initWithTGAData(tImageTGA* tgaData)
     }
     
     return ret;
+}
+
+bool Image::initWithASTCData(const unsigned char * data, ssize_t dataLen)
+{
+    astc_header* hdr = (astc_header*)data;
+
+    // Ensure these are not zero to avoid div by zero
+    unsigned int block_x = (std::max)((unsigned int)hdr->block_x, 1u);
+    unsigned int block_y = (std::max)((unsigned int)hdr->block_y, 1u);
+    // unsigned int block_z = std::max((unsigned int) hdr->block_z, 1u);
+
+    unsigned int dim_x = astc_unpack_bytes(hdr->dim_x[0], hdr->dim_x[1], hdr->dim_x[2], 0);
+    unsigned int dim_y = astc_unpack_bytes(hdr->dim_y[0], hdr->dim_y[1], hdr->dim_y[2], 0);
+    // unsigned int dim_z = astc_unpack_bytes(hdr->dim_z[0], hdr->dim_z[1], hdr->dim_z[2], 0);
+
+    if (dim_x == 0 || dim_y == 0)
+        return false;
+
+    _width  = dim_x;
+    _height = dim_y;
+
+    if (block_x < 4 || block_y < 4)
+    {
+        CCLOG("The ASTC block with and height should be >= 4");
+        return false;
+    }
+
+    // TODO: add ASTC hardware support check
+    if (false /*Configuration::getInstance()->supportsASTC()*/) {}
+    else
+    {
+        CCLOG("cocos2d: Hardware ASTC decoder not present. Using software decoder");
+        _renderFormat = Texture2D::PixelFormat::RGBA8888;
+
+        _dataLen = _width * _height * 4;
+        _data    = static_cast<uint8_t*>(malloc(_dataLen));
+        if (astc_decompress_image(static_cast<const uint8_t*>(data) + ASTC_HEAD_SIZE,
+                                  static_cast<uint32_t>(dataLen) - ASTC_HEAD_SIZE, _data, _width, _height, block_x, block_y) != 0)
+        {
+            _dataLen = 0;
+            if (_data != nullptr)
+            {
+                free(_data);
+            }
+            return false;
+        }
+        return true;
+    }
+
+    return false;
 }
 
 namespace
