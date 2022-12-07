@@ -25,12 +25,20 @@
  ****************************************************************************/
 
 #include "HelloWorldScene.h"
+
+#include <time.h>
 #include "ui/CocosGUI.h"
 
 USING_NS_CC;
 
 namespace {
     int ASTC_TAG = 1;
+    unsigned long long int getNowMillisecond()
+    {
+        struct timeval t;
+        gettimeofday(&t, NULL);
+        return t.tv_sec * 1000ull + t.tv_usec / 1000ull;
+    }
 };
 
 Scene* HelloWorld::createScene()
@@ -50,11 +58,17 @@ bool HelloWorld::init()
 
     Vec2 pos1 = Vec2(origin + visibleSize / 2);
     createTappableLabel("4x4", pos1, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
         createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
     });
     Vec2 pos2 = pos1 - Vec2(0, 24);
     createTappableLabel("8x8", pos2, [this, origin, visibleSize](){
+        auto start = getNowMillisecond();
         createAstc("lenna1024_4x4.astc", Vec2(origin + visibleSize / 2));
+        auto end = getNowMillisecond();
+        CCLOG("elapsed: %lld", end - start);
     });
     Vec2 pos3 = pos2 - Vec2(0, 24);
     createTappableLabel("clear", pos3, [this](){
