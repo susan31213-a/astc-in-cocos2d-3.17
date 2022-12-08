@@ -169,6 +169,13 @@ public:
      * @return Whether or not `glMapBuffer()` is supported.
      * @since v3.13
      */
+
+    /** Whether or not ASTC textures are supported.
+     *
+     * @return Is true if supports ASTC textures.
+     */
+    bool supportsASTC() const;
+
     bool supportsMapBuffer() const;
 
     
@@ -270,6 +277,7 @@ protected:
     bool            _supportsOESMapBuffer;
     bool            _supportsOESDepth24;
     bool            _supportsOESPackedDepthStencil;
+    bool            _supportsASTC;
     
     GLint           _maxSamplesAllowed;
     GLint           _maxTextureUnits;

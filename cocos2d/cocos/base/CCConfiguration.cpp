@@ -53,6 +53,7 @@ Configuration::Configuration()
 , _supportsOESMapBuffer(false)
 , _supportsOESDepth24(false)
 , _supportsOESPackedDepthStencil(false)
+, _supportsASTC(false)
 , _maxSamplesAllowed(0)
 , _maxTextureUnits(0)
 , _glExtensions(nullptr)
@@ -167,6 +168,9 @@ void Configuration::gatherGPUInfo()
     
     _supportsOESPackedDepthStencil = checkForGLExtension("GL_OES_packed_depth_stencil");
     _valueDict["gl.supports_OES_packed_depth_stencil"] = Value(_supportsOESPackedDepthStencil);
+
+    _supportsASTC = checkForGLExtension("GL_KHR_texture_compression_astc_ldr");
+    _valueDict["gl.supports_ASTC"] = Value(_supportsASTC);
 
 
     CHECK_GL_ERROR_DEBUG();
@@ -305,7 +309,10 @@ bool Configuration::supportsOESPackedDepthStencil() const
     return _supportsOESPackedDepthStencil;
 }
 
-
+bool Configuration::supportsASTC() const
+{
+    return _supportsASTC;
+}
 
 int Configuration::getMaxSupportDirLightInShader() const
 {
@@ -316,7 +323,6 @@ int Configuration::getMaxSupportPointLightInShader() const
 {
     return _maxPointLightInShader;
 }
-
 int Configuration::getMaxSupportSpotLightInShader() const
 {
     return _maxSpotLightInShader;
