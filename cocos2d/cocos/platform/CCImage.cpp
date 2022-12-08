@@ -1892,8 +1892,27 @@ bool Image::initWithASTCData(const unsigned char * data, ssize_t dataLen)
         return false;
     }
 
-    // TODO: add ASTC hardware support check
-    if (false /*Configuration::getInstance()->supportsASTC()*/) {}
+    if (Configuration::getInstance()->supportsASTC())
+    {
+        if (block_x == 4 && block_y == 4)
+        {
+            _renderFormat = Texture2D::PixelFormat::ASTC_4x4;
+        }
+        else if (block_x == 8 && block_y == 8)
+        {
+            _renderFormat = Texture2D::PixelFormat::ASTC_8x8;
+        }
+        else
+        {
+            CCLOG("Only supports ASTC block 4x4 and 8x8");
+            return false;
+        }
+
+        _dataLen = dataLen - ASTC_HEAD_SIZE;
+        _data = static_cast<unsigned char*>(malloc(_dataLen * sizeof(unsigned char)));
+        memcpy(_data, static_cast<const unsigned char*>(data) + ASTC_HEAD_SIZE, _dataLen);
+        return true;
+    }
     else
     {
         CCLOG("cocos2d: Hardware ASTC decoder not present. Using software decoder");
