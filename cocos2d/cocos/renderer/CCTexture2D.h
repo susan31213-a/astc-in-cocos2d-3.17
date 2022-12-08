@@ -115,6 +115,10 @@ public:
         ATC_EXPLICIT_ALPHA,
         //! ATITC-compressed texture: ATC_INTERPOLATED_ALPHA
         ATC_INTERPOLATED_ALPHA,
+        //! ASTC-compressed texture: ASTC 4x4
+        ASTC_4x4,
+        //! ASTC-compressed texture: ASTC 8x8
+        ASTC_8x8,
         //! Default texture format: AUTO
         DEFAULT = AUTO,
         

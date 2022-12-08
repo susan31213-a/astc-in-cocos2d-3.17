@@ -108,6 +108,8 @@ namespace {
         PixelFormatInfoMapValue(Texture2D::PixelFormat::ATC_INTERPOLATED_ALPHA, Texture2D::PixelFormatInfo(GL_ATC_RGBA_INTERPOLATED_ALPHA_AMD,
             0xFFFFFFFF, 0xFFFFFFFF, 8, true, false)),
 #endif
+        PixelFormatInfoMapValue(Texture2D::PixelFormat::ASTC_4x4, Texture2D::PixelFormatInfo(GL_COMPRESSED_RGBA_ASTC_4x4_KHR, 0xFFFFFFFF, 0xFFFFFFFF, 8, true, true)),
+        PixelFormatInfoMapValue(Texture2D::PixelFormat::ASTC_8x8, Texture2D::PixelFormatInfo(GL_COMPRESSED_RGBA_ASTC_8x8_KHR, 0xFFFFFFFF, 0xFFFFFFFF, 2, true, true)),
     };
 }
 
@@ -1380,6 +1382,12 @@ const char* Texture2D::getStringForFormat() const
 
         case Texture2D::PixelFormat::ATC_INTERPOLATED_ALPHA:
             return "ATC_INTERPOLATED_ALPHA";
+
+        case Texture2D::PixelFormat::ASTC_4x4:
+            return "ASTC_4x4";
+
+        case Texture2D::PixelFormat::ASTC_8x8:
+            return "ASTC_8x8";
             
         default:
             CCASSERT(false , "unrecognized pixel format");
